@@ -9,6 +9,8 @@
 #define ECHO_PIN 11
 #define MAX_DISTANCE 200
 
+int setDist = 7;
+
 NewPing sonar(TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE); // NewPing setup of pins and maximum distance.
 
 void setup() {
@@ -17,10 +19,13 @@ void setup() {
 
 void loop() {
    delay(50);
-  // unsigned int uS = sonar.ping_cm();
-  // Serial.print(uS);
-  // Serial.println('inch');
    unsigned int median_time = sonar.ping_median(5);
    unsigned int inch = sonar.convert_in(median_time);
    Serial.println(inch);
+   if (inch < 7 && inch != 0)
+      {
+        Serial.println("ALERT");
+        Serial.println("=====");
+      }
+
 }
