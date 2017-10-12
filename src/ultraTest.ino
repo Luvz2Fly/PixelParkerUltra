@@ -1,9 +1,11 @@
 /*
  * Posted on http://randomnerdtutorials.com
  * created by http://playground.arduino.cc/Code/NewPing
-*/
+
 
 #include <NewPing.h>
+#include <Adafruit_NeoPixel.h>
+
 
 #define TRIGGER_PIN 12
 #define ECHO_PIN 11
@@ -29,3 +31,4 @@ void loop() {
       }
 
 }
+*/
