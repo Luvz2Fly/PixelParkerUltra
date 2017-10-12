@@ -11,20 +11,61 @@
 //   NEO_RGB     Pixels are wired for RGB bitstream (v1 FLORA pixels, not v2)
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(16, PIN, NEO_GRB + NEO_KHZ800);
 
+
+
 void setup() {
+
+
+  Serial.begin(9600);      // open the serial port at 9600 bps:   DEBUGGER
+
+
+
   strip.begin();
   strip.show(); // Initialize all pixels to 'off'
   strip.setBrightness(8);
+
 }
 
 void loop() {
-  // Some example procedures showing how to display to the pixels:
-//  colorWipe(strip.Color(255, 0, 0), 50); // Red
-//  colorWipe(strip.Color(0, 255, 0), 50); // Green
-//  colorWipe(strip.Color(0, 0, 255), 50); // Blue
-//  rainbow(20);
-  rainbowCycle(5);
+// Some example procedures showing how to display to the pixels:
+//colorWipe(strip.Color(255, 0, 0), 50); // Red
+//colorWipe(strip.Color(0, 255, 0), 50); // Green
+// colorWipe(strip.Color(0, 0, 255), 50); // Blue//rainbow(20);
+//  rainbowCycle(1);
+
+
+//simulated Pinger reading
+for(int x = 79; x >0; x--) {
+  Serial.println(x);
+  distanceMeter(x);
+  delay(250);
 }
+
+Serial.println("---------");
+}
+
+void distanceMeter(int currentInches) {
+//Comments HERE = Me "Thinking out loud"
+// 16 Pixels used to mesure distance from 200cm (~80 Inches)
+// User Sets a STOP WARNING distance (apprx 10 inches from wall)
+// So we must map apprx 80"--->~10"   1px ---->16px
+// Fade from GREEN (7px) TO YELLOW->Orange (5px) TO Red (Last 4px)
+// For Testing purposes will set stopTarget = 10
+
+// curentInches = curent pinger value
+
+int stopTarget = 10;  //Testing Variable - Normally set by button
+int maxInches = 80;  // Going to ignore readings above 80 inches
+int mapPixel = map(currentInches,maxInches,stopTarget, 1, 15);
+// map the currentInches read from pinger using max range to StopTarget ranger
+Serial.println(mapPixel);
+
+delay(200);
+
+}
+
+
+
 
 // Fill the dots one after the other with a color
 void colorWipe(uint32_t c, uint8_t wait) {
