@@ -1,6 +1,6 @@
-#include <Adafruit_NeoPixel.h>
+//#include <Adafruit_NeoPixel.h>
 
-#define PIN 6
+//#define PIN 6
 
 // Parameter 1 = number of pixels in strip
 // Parameter 2 = pin number (most are valid)
@@ -47,7 +47,7 @@ delay(200);
 
 }
 
-*/
+
 
 
 // Fill the dots one after the other with a color
@@ -97,3 +97,4 @@ uint32_t Wheel(byte WheelPos) {
    return strip.Color(0, WheelPos * 3, 255 - WheelPos * 3);
   }
 }
+*/

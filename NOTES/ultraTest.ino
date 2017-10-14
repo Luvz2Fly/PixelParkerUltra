@@ -50,20 +50,39 @@ int maxInches = 30;  // Ignore readings above 80 inches
 int mapPixel = map(currentInches,maxInches,stopTarget, 0, 15);
 // map the currentInches from pinger using max range to StopTarget ranger
 // resulting value 0-15 represent the 16 pixels of the ring
+
 Serial.println(mapPixel);    //DEBUG PRINT MAPPED VALUE (What Pixel to light)
 clearRing();
 
-for(int i=0; i<mapPixel; i++) {
-  strip.setPixelColor(i, 0, 255, 0);
-  }
+if (mapPixel < 10)
+{
+  for(int i=0; i < mapPixel; i++) {
+    strip.setPixelColor(i, 0, 255, 0);
+      }
+}
+
+else if (mapPixel < 15)
+{
+  for(int i=0; i < mapPixel; i++) {
+    strip.setPixelColor(i, 128, 128, 0);
+    }
+
+} // end 10-15
+
+else (mapPixel > 14)
+{
+  for(int i=0; i < mapPixel; i++) {
+    strip.setPixelColor(i, 255, 0, 0);
+      }
+}
 
 strip.show();
-//delay(500);
+
 }
 
 
+
 void clearRing() {
-  //Reset Ring
   for(int x = 0; x <17; x++) {
     strip.setPixelColor(x,0,0,0);
   }
